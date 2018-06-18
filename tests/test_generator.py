@@ -1,7 +1,7 @@
 import mock
 import unittest
 
-from changelog_generator.generator import generate_changelog
+from .changelog_generator.generator import generate_changelog
 
 
 class TestGenerator(unittest.TestCase):

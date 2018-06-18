@@ -1,7 +1,7 @@
 import mock
 import unittest
 
-from changelog_generator.calls import (
+from .changelog_generator.calls import (
     get_last_commit_date,
     get_commits_since_date,
 )
