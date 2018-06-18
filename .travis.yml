@@ -5,4 +5,4 @@ install:
 - pip install pytest-cov
 
 script:
-- python3 -m --cov-report term-missing --cov=changelog_generator
+- python3 -m pytest --cov-report term-missing --cov=changelog_generator
