@@ -1,14 +1,14 @@
 import mock
 import unittest
 
-from gitlab_changelog_generator.calls import (
+from changelog_generator.calls import (
     get_last_commit_date,
     get_commits_since_date,
 )
 
 
 class TestCalls(unittest.TestCase):
-    @mock.patch("gitlab_changelog_generator.calls.requests.get")
+    @mock.patch("changelog_generator.calls.requests.get")
     def test_get_last_commit_date(self, mock_get):
         mock_get.return_value.json.return_value = {
             "committed_date": "2018-06-10T14:01:44.000+00:00"
@@ -28,7 +28,7 @@ class TestCalls(unittest.TestCase):
         commit_date = get_last_commit_date(cli_args)
         self.assertEqual(commit_date, "2018-06-10T14:01:45.000000+00:00")
 
-    @mock.patch("gitlab_changelog_generator.calls.requests.get")
+    @mock.patch("changelog_generator.calls.requests.get")
     def test_commits_since_date(self, mock_get):
         mock_get.return_value.json.return_value = [
             {

@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-from gitlab_changelog_generator.main import process_arguments
+from changelog_generator.main import process_arguments
 
 
 class TestGenerator(unittest.TestCase):

@@ -15,7 +15,7 @@ setuptools.setup(
     keywords="gitlab changelog python",
     url="https://github.com/stuartmccoll/gitlab-changelog-generator",
     entry_points={
-        "console_scripts": ["changegen=gitlab_changelog_generator.entry_point:main"]
+        "console_scripts": ["changegen=changelog_generator.entry_point:main"]
     },
     packages=setuptools.find_packages(),
     classifiers=(
