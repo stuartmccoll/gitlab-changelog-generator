@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from generator import generate_changelog
+from changelog_generator.generator import generate_changelog
 
 
 def process_arguments() -> dict:

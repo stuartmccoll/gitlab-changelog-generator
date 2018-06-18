@@ -1,8 +1,8 @@
 import datetime
 import os.path
 
-from log_handlers import logger
-from calls import get_last_commit_date, get_commits_since_date
+from changelog_generator.log_handlers import logger
+from changelog_generator.calls import get_last_commit_date, get_commits_since_date
 
 
 def generate_changelog(cli_args: dict) -> str:

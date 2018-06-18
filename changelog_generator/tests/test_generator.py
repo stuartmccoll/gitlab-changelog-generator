@@ -1,13 +1,13 @@
 import mock
 import unittest
 
-from gitlab_changelog_generator.generator import generate_changelog
+from changelog_generator.generator import generate_changelog
 
 
 class TestGenerator(unittest.TestCase):
     @mock.patch("os.path.isfile")
-    @mock.patch("gitlab_changelog_generator.generator.get_commits_since_date")
-    @mock.patch("gitlab_changelog_generator.generator.get_last_commit_date")
+    @mock.patch("changelog_generator.generator.get_commits_since_date")
+    @mock.patch("changelog_generator.generator.get_last_commit_date")
     def test_generator(self, mock_get_commit_date, mock_get_commits, mock_is_file):
 
         mock_get_commit_date.return_value = "2018-06-10T14:01:45.000000+00:00"

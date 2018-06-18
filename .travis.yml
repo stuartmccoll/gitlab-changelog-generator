@@ -1,0 +1,9 @@
+language: python
+python: "3.6"
+
+install:
+- pip install pytest-cov
+- pip install requests
+
+script:
+- python3 -m pytest --cov-report term-missing --cov=changelog_generator
