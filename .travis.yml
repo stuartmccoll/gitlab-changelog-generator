@@ -5,4 +5,4 @@ install:
 - pip install pytest-cov
 
 script:
-- py.test --cov-report term-missing --cov=src tests/
+- py.test --cov-report term-missing --cov=gitlab_changelog_generator tests/
