@@ -34,6 +34,7 @@ def generate_changelog(cli_args: dict) -> str:
                     ]
                     modified_changelog.write(f"\n")
                     modified_changelog.write(original_changelog_data)
+                    return "CHANGELOG.md updated successfully" 
         else:
             logger.info("Existing CHANGELOG.md found but not specified")
             logger.info("Writing CHANGELOG_generated.md as a result...")
@@ -47,14 +48,15 @@ def generate_changelog(cli_args: dict) -> str:
             return "CHANGELOG_generated.md written successfully"
     else:
         logger.info(
-            "Either existing CHANGELOG.md found and not specified, "
-            + "or no CHANGELOG.md found..."
+            "No CHANGELOG.md found and no CHANGELOG.md specified..."
         )
-        logger.info("Writing CHANGELOG_generated.md as a result...")
-        with open("CHANGELOG_generated.md", "w") as changelog:
+        logger.info("Writing CHANGELOG.md as a result...")
+        with open("CHANGELOG.md", "w") as changelog:
             changelog.write(f"## v{cli_args['version']} ({current_date})\n")
             [
                 changelog.write(f"* {commit['committed_date'][:10]} - {y} \n")
                 for commit in new_commits
                 for y in commit["message"].split("\n")
             ]
+
+        return "New CHANGELOG.md file written successfully"
