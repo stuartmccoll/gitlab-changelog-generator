@@ -8,5 +8,5 @@ install:
 
 script:
 - python3 -m pytest --cov-report term-missing --cov=changelog_generator
-- pyre init
+- pyre init .
 - pyre --source-directory . check
