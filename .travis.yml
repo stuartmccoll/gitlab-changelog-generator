@@ -2,8 +2,10 @@ language: python
 python: "3.6"
 
 install:
-- pip install pytest-cov
 - pip install requests
+- pip install pyre-check
+- pip install pytest-cov
 
 script:
 - python3 -m pytest --cov-report term-missing --cov=changelog_generator
+- pyre --source-directory . check
