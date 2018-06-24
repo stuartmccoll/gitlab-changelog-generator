@@ -2,7 +2,10 @@ import datetime
 import os.path
 
 from changelog_generator.log_handlers import logger
-from changelog_generator.calls import get_last_commit_date, get_commits_since_date
+from changelog_generator.calls import (
+    get_last_commit_date,
+    get_commits_since_date,
+)
 
 
 def generate_changelog(cli_args: dict) -> str:
@@ -34,22 +37,22 @@ def generate_changelog(cli_args: dict) -> str:
                     ]
                     modified_changelog.write(f"\n")
                     modified_changelog.write(original_changelog_data)
-                    return "CHANGELOG.md updated successfully" 
+                    return "CHANGELOG.md updated successfully"
         else:
             logger.info("Existing CHANGELOG.md found but not specified")
             logger.info("Writing CHANGELOG_generated.md as a result...")
             with open("CHANGELOG_generated.md", "w") as changelog:
                 changelog.write(f"## v{cli_args['version']} ({current_date})\n")
                 [
-                    changelog.write(f"* {commit['committed_date'][:10]} - {y} \n")
+                    changelog.write(
+                        f"* {commit['committed_date'][:10]} - {y} \n"
+                    )
                     for commit in new_commits
                     for y in commit["message"].split("\n")
                 ]
             return "CHANGELOG_generated.md written successfully"
     else:
-        logger.info(
-            "No CHANGELOG.md found and no CHANGELOG.md specified..."
-        )
+        logger.info("No CHANGELOG.md found and no CHANGELOG.md specified...")
         logger.info("Writing CHANGELOG.md as a result...")
         with open("CHANGELOG.md", "w") as changelog:
             changelog.write(f"## v{cli_args['version']} ({current_date})\n")

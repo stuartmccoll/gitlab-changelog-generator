@@ -21,10 +21,18 @@ def process_arguments() -> dict:
         default="4",
     )
     parser.add_argument(
-        "-g", "--group", dest="group", help="specify GitLab group", required=True
+        "-g",
+        "--group",
+        dest="group",
+        help="specify GitLab group",
+        required=True,
     )
     parser.add_argument(
-        "-p", "--project", dest="project", help="specify GitLab project", required=True
+        "-p",
+        "--project",
+        dest="project",
+        help="specify GitLab project",
+        required=True,
     )
     parser.add_argument(
         "-b",
@@ -43,7 +51,11 @@ def process_arguments() -> dict:
         default="N",
     )
     parser.add_argument(
-        "-v", "--version", dest="version", help="specify version number", required=True
+        "-v",
+        "--version",
+        dest="version",
+        help="specify version number",
+        required=True,
     )
 
     args = parser.parse_args()
