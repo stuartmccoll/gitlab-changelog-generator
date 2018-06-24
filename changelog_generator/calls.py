@@ -1,6 +1,7 @@
 import datetime
 import logging
 import requests
+import sys
 
 
 logger = logging.getLogger(__name__)
@@ -13,7 +14,20 @@ def get_last_commit_date(cli_args: dict) -> str:
     """
     request_url = f"http://{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/" f"{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/{cli_args['branch_one']}"
     logger.info(f"Requesting last commit date with URL: {request_url}")
-    response = requests.get(request_url)
+    try:
+        response = requests.get(request_url)
+        logger.info(response.status_code)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as ex:
+        logger.error(
+            f"{get_last_commit_date.__name__} call to GitLab API failed with HTTPError: {ex}"
+        )
+        sys.exit(1)
+    except requests.exceptions.ConnectionError as ex:
+        logger.error(
+            f"{get_last_commit_date.__name__} call to GitLab API failed with ConnectionError: {ex}"
+        )
+        sys.exit(1)
 
     logger.debug(response.status_code)
     logger.debug(response.json())
@@ -25,7 +39,8 @@ def get_last_commit_date(cli_args: dict) -> str:
     ) + datetime.timedelta(seconds=1)
 
     return datetime.datetime.strftime(
-        commit_date, f"%Y-%m-%dT%H:%M:%S.%f{response_json['committed_date'][-6:]}"
+        commit_date,
+        f"%Y-%m-%dT%H:%M:%S.%f{response_json['committed_date'][-6:]}",
     )
 
 
@@ -39,7 +54,19 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
     logger.info(
         f"Requesting commits on branch '{cli_args['branch_two']}' in repository '{cli_args['project']}' since date '{date}' with URL: {request_url}"
     )
-    response = requests.get(request_url)
+    try:
+        response = requests.get(request_url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as ex:
+        logger.error(
+            f"{get_commits_since_date.__name__} call to GitLab API failed with HTTPError: {ex}"
+        )
+        sys.exit(1)
+    except requests.exceptions.ConnectionError as ex:
+        logger.error(
+            f"{get_commits_since_date.__name__} call to GitLab API failed with ConnectionError: {ex}"
+        )
+        sys.exit(1)
 
     logger.debug(response.status_code)
     logger.debug(response.json())
