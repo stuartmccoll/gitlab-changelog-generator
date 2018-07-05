@@ -6,7 +6,7 @@
 
 A simple command line utility to produce a CHANGELOG.md file from the commit differences between two GitLab project branches.
 
-**Python 3.6** is required to run this utility.
+**Python 3.6** or **Python 3.7** are required to run this utility.
 
 ## Installation
 
