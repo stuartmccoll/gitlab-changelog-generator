@@ -1,13 +1,14 @@
 language: python
-python: 
+python:
   - "3.6"
   - "3.7-dev"
 
 install:
-- pip install requests
-- pip install pyre-check
-- pip install pytest-cov
+  - pip install python-dateutil
+  - pip install requests
+  - pip install pyre-check
+  - pip install pytest-cov
+  - pip install pytz
 
 script:
-- python3 -m pytest --cov-report term-missing --cov=changelog_generator
-- pyre --source-directory . check
+  - python3 -m pytest --cov-report term-missing --cov=changelog_generator
