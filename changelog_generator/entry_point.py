@@ -57,6 +57,13 @@ def process_arguments() -> dict:
         help="specify version number",
         required=True,
     )
+    parser.add_argument(
+        "-t",
+        "--token",
+        dest="token",
+        help="gitlab personal token for auth",
+        required=False,
+    )
 
     args = parser.parse_args()
 
