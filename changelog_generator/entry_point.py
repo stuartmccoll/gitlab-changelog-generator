@@ -76,6 +76,7 @@ def process_arguments() -> dict:
         "branch_two": args.branches[1],
         "version": args.version,
         "changelog": args.changelog,
+        "token": args.token,
     }
 
 

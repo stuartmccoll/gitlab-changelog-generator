@@ -15,7 +15,14 @@ def get_last_commit_date(cli_args: dict) -> str:
     request_url = f"http://{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/" f"{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/{cli_args['branch_one']}"
     logger.info(f"Requesting last commit date with URL: {request_url}")
     try:
-        response = requests.get(request_url, headers={"PRIVATE-TOKEN":cli_args['token']})
+        response = requests.get(
+            request_url,
+            headers={
+                "PRIVATE-TOKEN": cli_args["token"]
+                if "token" in cli_args
+                else None
+            },
+        )
         logger.info(response.status_code)
         response.raise_for_status()
     except requests.exceptions.HTTPError as ex:
@@ -54,7 +61,12 @@ def get_closed_issues_for_project(cli_args: dict) -> dict:
         f"Requesting tags for project {cli_args['project']} with URL: {request_url}"
     )
     try:
-        response = requests.get(request_url, headers={"PRIVATE-TOKEN":cli_args['token']})
+        response = requests.get(
+            request_url,
+            headers={"PRIVATE-TOKEN": cli_args["token"]}
+            if "token" in cli_args
+            else None,
+        )
         response.raise_for_status()
     except requests.exceptions.HTTPError as ex:
         logger.error(
@@ -83,7 +95,12 @@ def get_last_tagged_release_date(cli_args: dict) -> str:
         f"Requesting tags for project {cli_args['project']} with URL: {request_url}"
     )
     try:
-        response = requests.get(request_url, headers={"PRIVATE-TOKEN":cli_args['token']})
+        response = requests.get(
+            request_url,
+            headers={"PRIVATE-TOKEN": cli_args["token"]}
+            if "token" in cli_args
+            else None,
+        )
         response.raise_for_status()
     except requests.exceptions.HTTPError as ex:
         logger.error(
@@ -113,7 +130,12 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
         f"Requesting commits on branch '{cli_args['branch_two']}' in repository '{cli_args['project']}' since date '{date}' with URL: {request_url}"
     )
     try:
-        response = requests.get(request_url, headers={"PRIVATE-TOKEN":cli_args['token']})
+        response = requests.get(
+            request_url,
+            headers={"PRIVATE-TOKEN": cli_args["token"]}
+            if "token" in cli_args
+            else None,
+        )
         response.raise_for_status()
     except requests.exceptions.HTTPError as ex:
         logger.error(

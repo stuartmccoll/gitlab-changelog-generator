@@ -19,6 +19,8 @@ class TestGenerator(unittest.TestCase):
             "master",
             "--version",
             "1.2.3",
+            "--token",
+            "test-token",
         ]
         expected_result = {
             "ip_address": "localhost",
@@ -29,6 +31,7 @@ class TestGenerator(unittest.TestCase):
             "branch_two": "master",
             "version": "1.2.3",
             "changelog": "N",
+            "token": "test-token",
         }
 
         result = process_arguments()
