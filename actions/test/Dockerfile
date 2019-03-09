@@ -10,6 +10,7 @@ LABEL "maintainer"="Stuart McColl <it@stuartmccoll.co.uk>"
 
 RUN pip install --upgrade pip
 RUN pip install pytest
+RUN pip install requirements.txt
 RUN python --version ; pip --version ; pytest --version
 
 COPY entrypoint.sh /
