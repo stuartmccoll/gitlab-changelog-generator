@@ -1,5 +1,5 @@
 workflow "Main Workflow" {
-    on = "push"
+    on = "pull_request"
     resolves = "Unit Tests"
 }
 
