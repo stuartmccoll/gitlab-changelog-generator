@@ -10,7 +10,7 @@ LABEL "maintainer"="Stuart McColl <it@stuartmccoll.co.uk>"
 
 RUN apk add --no-cache bash build-base gcc
 RUN pip install --upgrade pip
-RUN pip install pytest mock requests
+RUN pip install pytest mock requests dateutil
 RUN python --version ; pip --version ; pytest --version
 
 COPY entrypoint.sh /
