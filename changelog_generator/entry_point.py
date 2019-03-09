@@ -9,7 +9,8 @@ def process_arguments() -> dict:
         "-i",
         "--ip",
         dest="ip",
-        help="specify IP address of GitLab repository",
+        help="specify IP address of GitLab repository - should include \
+              protocol (http/s)",
         required=True,
     )
     parser.add_argument(

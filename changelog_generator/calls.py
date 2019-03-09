@@ -12,7 +12,7 @@ def get_last_commit_date(cli_args: dict) -> str:
     Queries a specified GitLab API and returns the date of the most
     recent commit.
     """
-    request_url = f"http://{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/" f"{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/{cli_args['branch_one']}"
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/" f"{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/{cli_args['branch_one']}"
     logger.info(f"Requesting last commit date with URL: {request_url}")
     try:
         response = requests.get(
@@ -56,7 +56,7 @@ def get_closed_issues_for_project(cli_args: dict) -> dict:
     Queries a specified GitLab API and returns a list containing
     the titles and URLs of closed issues since a given date.
     """
-    request_url = f"http://{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/issues?state=closed"
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/issues?state=closed"
     logger.info(
         f"Requesting tags for project {cli_args['project']} with URL: {request_url}"
     )
@@ -90,7 +90,7 @@ def get_last_tagged_release_date(cli_args: dict) -> str:
     Queries a specified GitLab API and returns a string containing
     the created_at date of the last tagged release.
     """
-    request_url = f"http://{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/repository/tags"
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/repository/tags"
     logger.info(
         f"Requesting tags for project {cli_args['project']} with URL: {request_url}"
     )
@@ -125,7 +125,7 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
     all commits since a given date.
     """
 
-    request_url = f"http://{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/?ref_name={cli_args['branch_two']}&since={date}"
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/?ref_name={cli_args['branch_two']}&since={date}"
     logger.info(
         f"Requesting commits on branch '{cli_args['branch_two']}' in repository '{cli_args['project']}' since date '{date}' with URL: {request_url}"
     )
