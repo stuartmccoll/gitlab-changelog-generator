@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.0.4 - 2019/03/09
+
+- Amended IP address command line argument to also require the relevant protocol (HTTP/S).
+- Added GitHub Action to run unit tests when a pull request is raised.
+
 ## v1.0.3 - 2018/07/05
 
 - Added the ability to use GitLab personal auth token - [pull request](https://github.com/stuartmccoll/gitlab-changelog-generator/pull/20) submitted by [stotler](https://github.com/stuartmccoll/gitlab-changelog-generator/issues?q=is%3Apr+author%3Astotler).
