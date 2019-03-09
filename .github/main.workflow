@@ -6,4 +6,3 @@ workflow "Main Workflow" {
 action "Unit Tests" {
     uses = "./actions/test"
 }
-
