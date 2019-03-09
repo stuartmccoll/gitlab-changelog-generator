@@ -12,6 +12,6 @@ RUN pip install --upgrade pip
 RUN pip install pytest
 RUN python --version ; pip --version ; pytest --version
 
-ADD entrypoint.sh /entrypoint.sh
-
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
