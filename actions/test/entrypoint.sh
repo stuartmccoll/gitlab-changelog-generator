@@ -2,5 +2,6 @@
 
 sh -c "echo 'Running unit tests...'"
 
-# pytest
 ls
+pip install -e .
+pytest
