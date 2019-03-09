@@ -9,7 +9,7 @@ LABEL "repository"="https://github.com/stuartmccoll/gitlab-changelog-generator"
 LABEL "maintainer"="Stuart McColl <it@stuartmccoll.co.uk>"
 
 RUN pip install --upgrade pip
-RUN pip install pytest unittest mock requests
+RUN pip install pytest mock requests
 RUN python --version ; pip --version ; pytest --version
 
 COPY entrypoint.sh /
