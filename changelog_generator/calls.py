@@ -41,14 +41,20 @@ def get_last_commit_date(cli_args: dict) -> str:
 
     response_json = response.json()
 
-    commit_date = datetime.datetime.strptime(
-        response_json["committed_date"][:-6], "%Y-%m-%dT%H:%M:%S.%f"
-    ) + datetime.timedelta(seconds=1)
+    logger.debug("*" * 20)
+    logger.debug(response_json["committed_date"])
+    logger.debug(response_json["committed_date"][:10])
+    logger.debug("*" * 20)
 
-    return datetime.datetime.strftime(
-        commit_date,
-        f"%Y-%m-%dT%H:%M:%S.%f{response_json['committed_date'][-6:]}",
-    )
+    from dateutil import parser
+
+    logger.debug(parser.parse(response_json["committed_date"]))
+    logger.debug("hello")
+
+    commit_date = parser.parse(response_json["committed_date"])
+    commit_date = commit_date + datetime.timedelta(microseconds=1)
+
+    return datetime.datetime.strftime(commit_date, "%Y-%m-%dT%H:%M:%S.%f")
 
 
 def get_closed_issues_for_project(cli_args: dict) -> dict:
@@ -156,9 +162,9 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
         item for item in response_json if len(list(item["parent_ids"])) == 1
     ]
 
+    from dateutil import parser
+
     return sorted(
         clean_response,
-        key=lambda x: datetime.datetime.strptime(
-            x["committed_date"][:-6], "%Y-%m-%dT%H:%M:%S.%f"
-        ),
+        key=lambda x: datetime.datetime.strftime(parser.parse(x["committed_date"]), "%Y-%m-%dT%H:%M:%S.%f"),
     )
