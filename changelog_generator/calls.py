@@ -3,6 +3,8 @@ import logging
 import requests
 import sys
 
+from dateutil import parser
+
 
 logger = logging.getLogger(__name__)
 
@@ -45,10 +47,11 @@ def get_last_commit_date(cli_args: dict) -> str:
         response_json["committed_date"][:-6], "%Y-%m-%dT%H:%M:%S.%f"
     ) + datetime.timedelta(seconds=1)
 
-    return datetime.datetime.strftime(
-        commit_date,
-        f"%Y-%m-%dT%H:%M:%S.%f{response_json['committed_date'][-6:]}",
-    )
+    commit_date = parser.parse(
+        response_json["committed_date"]
+    ) + datetime.timedelta(microseconds=1)
+
+    return datetime.datetime.strftime(commit_date, "%Y-%m-%dT%H:%M:%S.%f")
 
 
 def get_closed_issues_for_project(cli_args: dict) -> dict:
@@ -159,6 +162,6 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
     return sorted(
         clean_response,
         key=lambda x: datetime.datetime.strptime(
-            x["committed_date"][:-6], "%Y-%m-%dT%H:%M:%S.%f"
+            parser.parse(x["committed_date"]), "%Y-%m-%dT%H:%M:%S.%f"
         ),
     )
