@@ -18,7 +18,7 @@ setuptools.setup(
         "console_scripts": ["changegen=changelog_generator.entry_point:main"]
     },
     packages=setuptools.find_packages(),
-    install_requires=["requests", "dateutil"],
+    install_requires=["requests", "python-dateutil"],
     tests_require=["unittest", "mock"],
     classifiers=(
         "Environment :: Console",
