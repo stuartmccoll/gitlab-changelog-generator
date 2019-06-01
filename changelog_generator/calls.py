@@ -161,7 +161,7 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
 
     return sorted(
         clean_response,
-        key=lambda x: datetime.datetime.strptime(
+        key=lambda x: datetime.datetime.strftime(
             parser.parse(x["committed_date"]), "%Y-%m-%dT%H:%M:%S.%f"
         ),
     )

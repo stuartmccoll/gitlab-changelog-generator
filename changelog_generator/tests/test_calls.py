@@ -54,7 +54,7 @@ class TestCalls(unittest.TestCase):
         }
 
         commit_date = get_last_commit_date(cli_args)
-        self.assertEqual(commit_date, "2018-06-10T14:01:45.000000+00:00")
+        self.assertEqual(commit_date, "2018-06-10T14:01:44.000001")
 
     @mock.patch("sys.exit")
     @mock.patch("changelog_generator.calls.requests.get")
