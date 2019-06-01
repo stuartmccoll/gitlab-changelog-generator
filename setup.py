@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="gitlab-changelog-generator",
-    version="1.0.4",
+    version="1.0.5",
     author="Stuart McColl",
     author_email="it@stuartmccoll.co.uk",
     description="A small command line utility for generating CHANGELOG.md "
@@ -18,7 +18,7 @@ setuptools.setup(
         "console_scripts": ["changegen=changelog_generator.entry_point:main"]
     },
     packages=setuptools.find_packages(),
-    install_requires=["requests"],
+    install_requires=["requests", "dateutil"],
     tests_require=["unittest", "mock"],
     classifiers=(
         "Environment :: Console",

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.5 - 2019/06/01
+
+- Amended the way date formatting is handled - [issue](https://github.com/stuartmccoll/gitlab-changelog-generator/issues/25) raised by [smutel](https://github.com/smutel), commit(s) contributed by [smutel](https://github.com/smutel).
+
 ## v1.0.4 - 2019/03/09
 
 - Amended IP address command line argument to also require the relevant protocol (HTTP/S).
