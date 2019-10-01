@@ -29,6 +29,7 @@ class TestCalls(unittest.TestCase):
             "branch_two": "master",
             "version": "1",
             "changelog": "N",
+            "ssl": "True",
         }
 
         try:
@@ -51,6 +52,7 @@ class TestCalls(unittest.TestCase):
             "branch_two": "master",
             "version": "1",
             "changelog": "N",
+            "ssl": "True",
         }
 
         commit_date = get_last_commit_date(cli_args)
@@ -74,6 +76,7 @@ class TestCalls(unittest.TestCase):
             "branch_two": "master",
             "version": "1",
             "changelog": "N",
+            "ssl": "True",
         }
 
         try:
@@ -103,6 +106,7 @@ class TestCalls(unittest.TestCase):
             "branch_two": "master",
             "version": "1",
             "changelog": "N",
+            "ssl": "True",
         }
 
         commits = get_commits_since_date(
@@ -138,6 +142,7 @@ class TestCalls(unittest.TestCase):
             "branch_two": "master",
             "version": "1",
             "changelog": "N",
+            "ssl": "True",
         }
 
         self.assertEqual(
@@ -165,6 +170,7 @@ class TestCalls(unittest.TestCase):
             "branch_two": "master",
             "version": "1",
             "changelog": "N",
+            "ssl": "True",
         }
 
         self.assertEqual(

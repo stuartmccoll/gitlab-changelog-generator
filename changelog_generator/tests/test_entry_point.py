@@ -32,6 +32,7 @@ class TestGenerator(unittest.TestCase):
             "version": "1.2.3",
             "changelog": "N",
             "token": "test-token",
+            "ssl": True,
         }
 
         result = process_arguments()

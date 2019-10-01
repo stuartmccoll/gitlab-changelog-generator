@@ -24,6 +24,7 @@ def get_last_commit_date(cli_args: dict) -> str:
                 if "token" in cli_args
                 else None
             },
+            verify=cli_args["ssl"],
         )
         logger.info(response.status_code)
         response.raise_for_status()
@@ -69,6 +70,7 @@ def get_closed_issues_for_project(cli_args: dict) -> dict:
             headers={"PRIVATE-TOKEN": cli_args["token"]}
             if "token" in cli_args
             else None,
+            verify=cli_args["ssl"],
         )
         response.raise_for_status()
     except requests.exceptions.HTTPError as ex:
@@ -103,6 +105,7 @@ def get_last_tagged_release_date(cli_args: dict) -> str:
             headers={"PRIVATE-TOKEN": cli_args["token"]}
             if "token" in cli_args
             else None,
+            verify=cli_args["ssl"],
         )
         response.raise_for_status()
     except requests.exceptions.HTTPError as ex:
@@ -138,6 +141,7 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
             headers={"PRIVATE-TOKEN": cli_args["token"]}
             if "token" in cli_args
             else None,
+            verify=cli_args["ssl"],
         )
         response.raise_for_status()
     except requests.exceptions.HTTPError as ex:

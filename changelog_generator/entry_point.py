@@ -65,6 +65,15 @@ def process_arguments() -> dict:
         help="gitlab personal token for auth",
         required=False,
     )
+    parser.add_argument(
+        "-s",
+        "--ssl",
+        dest="ssl",
+        help="specify whether or not to enable ssl",
+        required=False,
+        default=True,
+        type=lambda x: (str(x).lower() in ["false", "2", "no"]),
+    )
 
     args = parser.parse_args()
 
@@ -78,6 +87,7 @@ def process_arguments() -> dict:
         "version": args.version,
         "changelog": args.changelog,
         "token": args.token,
+        "ssl": args.ssl,
     }
 
 

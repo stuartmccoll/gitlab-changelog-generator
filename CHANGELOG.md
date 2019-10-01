@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.0.6 - 2019/10/01
+
+- Added a flag to disable SSL checking - [issue](https://github.com/stuartmccoll/gitlab-changelog-generator/issues/30) raised by [PhilLab](https://github.com/PhilLab).
+
 ## v1.0.5 - 2019/06/01
 
 - Amended the way date formatting is handled - [issue](https://github.com/stuartmccoll/gitlab-changelog-generator/issues/25) raised by [smutel](https://github.com/smutel), commit(s) contributed by [smutel](https://github.com/smutel).
