@@ -37,3 +37,39 @@ class TestGenerator(unittest.TestCase):
 
         result = process_arguments()
         self.assertEqual(result, expected_result)
+
+    def test_ssl_false(self):
+        sys.argv = [
+            "script",
+            "--ip",
+            "localhost",
+            "--group",
+            "test-group",
+            "--project",
+            "test-project",
+            "--branches",
+            "release",
+            "master",
+            "--version",
+            "1.2.3",
+            "--token",
+            "test-token",
+            "--ssl",
+            "False"
+        ]
+
+        expected_result = {
+            "ip_address": "localhost",
+            "api_version": "4",
+            "project_group": "test-group",
+            "project": "test-project",
+            "branch_one": "release",
+            "branch_two": "master",
+            "version": "1.2.3",
+            "changelog": "N",
+            "token": "test-token",
+            "ssl": False,
+        }
+
+        result = process_arguments()
+        self.assertEqual(result, expected_result)
