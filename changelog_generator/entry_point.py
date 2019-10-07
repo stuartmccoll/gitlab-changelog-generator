@@ -69,10 +69,10 @@ def process_arguments() -> dict:
         "-s",
         "--ssl",
         dest="ssl",
-        help="specify whether or not to enable ssl",
+        help="specify whether or not to enable certificate verification",
         required=False,
         default=True,
-        type=lambda x: (str(x).lower() in ["false", "2", "no"]),
+        type=lambda x: (str(x).lower() not in ["false", "2", "no"]),
     )
 
     args = parser.parse_args()
