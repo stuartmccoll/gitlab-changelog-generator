@@ -1,12 +1,21 @@
 import datetime
+import iso8601
 import logging
 import requests
+import rfc3339
 import sys
-
 from dateutil import parser
-
+from urllib.parse import quote
 
 logger = logging.getLogger(__name__)
+
+
+def get_date_object(date_string):
+    return iso8601.parse_date(date_string)
+
+
+def get_date_string(date_object):
+    return rfc3339.rfc3339(date_object)
 
 
 def get_last_commit_date(cli_args: dict) -> str:
@@ -14,13 +23,13 @@ def get_last_commit_date(cli_args: dict) -> str:
     Queries a specified GitLab API and returns the date of the most
     recent commit.
     """
-    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/" f"{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/{cli_args['branch_one']}"
-    logger.info(f"Requesting last commit date with URL: {request_url}")
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/" f"{cli_args['project']}/repository/branches/{quote(cli_args['branch_one'], safe='')}"
+    logger.info(f"Requesting last commit date with URL: {request_url} {cli_args['token']} {cli_args['ssl']}")
     try:
         response = requests.get(
             request_url,
             headers={
-                "PRIVATE-TOKEN": cli_args["token"]
+                "Private-Token": cli_args["token"]
                 if "token" in cli_args
                 else None
             },
@@ -43,14 +52,10 @@ def get_last_commit_date(cli_args: dict) -> str:
     logger.debug(response.json())
 
     response_json = response.json()
+    commit_dict = response_json["commit"]
 
-    commit_date = datetime.datetime.strptime(
-        response_json["committed_date"][:-6], "%Y-%m-%dT%H:%M:%S.%f"
-    ) + datetime.timedelta(seconds=1)
-
-    commit_date = parser.parse(
-        response_json["committed_date"]
-    ) + datetime.timedelta(microseconds=1)
+    logger.info(f"response")
+    commit_date = get_date_object(commit_dict["committed_date"]) + datetime.timedelta(seconds=1)
 
     return datetime.datetime.strftime(commit_date, "%Y-%m-%dT%H:%M:%S.%f")
 
@@ -60,7 +65,7 @@ def get_closed_issues_for_project(cli_args: dict) -> dict:
     Queries a specified GitLab API and returns a list containing
     the titles and URLs of closed issues since a given date.
     """
-    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/issues?state=closed"
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project']}/issues?state=closed"
     logger.info(
         f"Requesting tags for project {cli_args['project']} with URL: {request_url}"
     )
@@ -95,7 +100,7 @@ def get_last_tagged_release_date(cli_args: dict) -> str:
     Queries a specified GitLab API and returns a string containing
     the created_at date of the last tagged release.
     """
-    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/repository/tags"
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project']}/repository/tags"
     logger.info(
         f"Requesting tags for project {cli_args['project']} with URL: {request_url}"
     )
@@ -131,7 +136,7 @@ def get_commits_since_date(date: str, cli_args: dict) -> list:
     all commits since a given date.
     """
 
-    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project_group']}%2F{cli_args['project']}/repository/commits/?ref_name={cli_args['branch_two']}&since={date}"
+    request_url = f"{cli_args['ip_address']}/api/v{cli_args['api_version']}/projects/{cli_args['project']}/repository/commits/?ref_name={cli_args['branch_two']}&since={date}"
     logger.info(
         f"Requesting commits on branch '{cli_args['branch_two']}' in repository '{cli_args['project']}' since date '{date}' with URL: {request_url}"
     )
