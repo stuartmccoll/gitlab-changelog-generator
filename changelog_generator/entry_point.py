@@ -21,13 +21,11 @@ def process_arguments() -> dict:
         choices=["1", "2", "3", "4"],
         default="4",
     )
-    parser.add_argument(
-        "-g",
-        "--group",
-        dest="group",
-        help="specify GitLab group",
-        required=True,
-    )
+    # parser.add_argument(
+    #     dest="group",
+    #     help="specify GitLab group",
+    #     required=True,
+    # )
     parser.add_argument(
         "-p",
         "--project",
@@ -42,14 +40,6 @@ def process_arguments() -> dict:
         dest="branches",
         help="specify GitLab branches to compare",
         required=True,
-    )
-    parser.add_argument(
-        "-c",
-        "--changelog",
-        dest="changelog",
-        help="specify whether an existing CHANGELOG.md exists",
-        choices=["Y", "N"],
-        default="N",
     )
     parser.add_argument(
         "-v",
@@ -74,18 +64,25 @@ def process_arguments() -> dict:
         default=True,
         type=lambda x: (str(x).lower() not in ["false", "2", "no"]),
     )
+    parser.add_argument(
+        "-sp",
+        "--subproject",
+        dest="sub_project",
+        help="specify project to filter",
+        required=True,
+    )
 
     args = parser.parse_args()
 
     return {
         "ip_address": args.ip,
         "api_version": args.api,
-        "project_group": args.group,
+        # "project_group": args.group,
         "project": args.project,
+        "sub_project": args.sub_project,
         "branch_one": args.branches[0],
         "branch_two": args.branches[1],
         "version": args.version,
-        "changelog": args.changelog,
         "token": args.token,
         "ssl": args.ssl,
     }
