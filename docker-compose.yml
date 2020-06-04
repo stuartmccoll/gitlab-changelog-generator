@@ -1,0 +1,7 @@
+version: "3"
+services:
+  web:
+    build: Dockerfile_dev
+    command: tail -f /dev/null
+    volumes:
+      - .:/gitlab-changelog-generator
